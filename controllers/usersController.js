@@ -2,8 +2,8 @@ const express = require('express')
 const controller = express.Router()
 let products = require('../data/simulated_database')
 
-controller.param("id", (req, res, next, id) => {
-    req.product = products.find(product => product.id == id)
+controller.param("articleNumber", (req, res, next, articleNumber) => {
+    req.product = products.find(product => product.articleNumber == articleNumber)
     next()
 })
 
@@ -13,7 +13,7 @@ controller.param("id", (req, res, next, id) => {
 controller.route('/')
 .post((httpRequest, httpResponse) => {
     let product = {
-        id: (products[products.length -1])?.id > 0 ? (products[products.length -1])?.id + 1 : 1,
+        articleNumber: (products[products.length -1])?.articleNumber > 0 ? (products[products.length -1])?.articleNumber + 1 : 1,
         name: httpRequest.body.name,
         category: httpRequest.body.category,
         price: httpRequest.body.price,
@@ -33,17 +33,18 @@ controller.route('/')
 // GET - READ - Hämta alla användare - http://localhost:5000/api/products
 // GET - READ - Hämta EN användare - http://localhost:5000/api/products/1
 
-controller.route("/:id")
+controller.route("/:articleNumber")
 .get((httpRequest, httpResponse) => {
     if (httpRequest.product != undefined)
         httpResponse.status(200).json(httpRequest.product)
     else
         httpResponse.status(404).json()
 })
+
 .put((httpRequest, httpResponse) => {
     if (httpRequest.product != undefined){
         products.forEach(product => {
-            if (product.id == httpRequest.product.id) {
+            if (product.articleNumber == httpRequest.product.articleNumber) {
                 product.name = httpRequest.body.name ? httpRequest.body.name : product.name
                 product.category = httpRequest.body.category ? httpRequest.body.category : product.category
                 product.price = httpRequest.body.price ? httpRequest.body.price : product.price
@@ -57,13 +58,14 @@ controller.route("/:id")
     else
         httpResponse.status(404).json()
 })
+
 .delete((httpRequest, httpResponse) => {
     if (httpRequest.product != undefined){
-        products = products.filter(product => product.id !== httpRequest.product.id)
+        products = products.filter(product => product.articleNumber !== httpRequest.product.articleNumber)
         httpResponse.status(204).json()
     }
     else
-        httpResponse.status(404).json()
+        httpResponse.status(404).json({ message: 'not found'})
 })
 
 
