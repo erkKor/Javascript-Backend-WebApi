@@ -11,8 +11,8 @@ const authorize = (req, res, next) => {
     if( req.headers.authorization && req.headers.authorization.startsWith('Bearer')){
         try {
             const accesToken = req.headers.authorization.split(' ')[1]
-        const decodedAccesToken = jwt.verify(accesToken, process.env.JWT_SECRET)
-        next()
+            const decodedAccesToken = jwt.verify(accesToken, process.env.JWT_SECRET)
+            next()
         } catch {
             res.status(401).json()
         }

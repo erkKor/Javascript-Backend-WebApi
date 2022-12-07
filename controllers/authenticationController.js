@@ -45,7 +45,8 @@ controller.route('/signin').post(async(req,res) => {
     const user = await userSchema.findOne({email})
     if(user && await bcrypt.compare(password, user.password)){
         res.status(200).json({
-            accesToken: generateAccesToken(user._id)
+            accesToken: generateAccesToken(user._id),
+            name : user.firstName
         })
     } else{
         res.status(400).json({text: 'wrong email or password'})

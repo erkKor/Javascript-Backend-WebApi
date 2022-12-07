@@ -3,12 +3,10 @@ const { authorize } = require('../middlewares/authorization')
 const productSchema = require('../schema/productSchema')
 const controller = express.Router()
 
-const ProductSchema = require('../schema/productSchema')
 
 // SECURED
-controller.route('/').post( async (req, res) => {
+controller.route('/').post(authorize, async (req, res) => {
     const {name, category, tag, price, rating, imageName} = req.body
-
     if (!name || !tag || !category || !price || !rating)
         res.status(400).json({text: 'Fields cannot be empty'})
     
@@ -25,7 +23,7 @@ controller.route('/').post( async (req, res) => {
             imageName
         })
 
-        // const productNEW = await ProductSchema.findById(req.params.articleNumber)
+        // const productNEW = await productSchema.findById(req.params.articleNumber)
 
         if (product)
             res.status(201).json(product)
@@ -38,7 +36,7 @@ controller.route('/').post( async (req, res) => {
 
 .get(async (req, res) => {
     const ReactProducts = []
-    const DBproducts = await ProductSchema.find()
+    const DBproducts = await productSchema.find()
     if(DBproducts) {
         for(let product of DBproducts) {
             ReactProducts.push({
@@ -59,7 +57,7 @@ controller.route('/').post( async (req, res) => {
 
 controller.route("/details/:articleNumber")
 .get(async(req, res) => {
-    const product = await ProductSchema.findById(req.params.articleNumber)
+    const product = await productSchema.findById(req.params.articleNumber)
     if(product){
         res.status(200).json({
             articleNumber: product._id,
@@ -76,14 +74,19 @@ controller.route("/details/:articleNumber")
 })
 
 .put(async (req, res) => { 
-    const product = await productSchema.findById(req.params.articleNumber)
-    // if {
-        // GÖR SOM POST
-  
-    //     res.status(200).json(req.product)
-    // }
-        
-    // else
+    const product = {
+        name: req.body.name,
+        category: req.body.category,
+        tag: req.body.tag,
+        price: req.body.price,
+        rating: req.body.rating,
+        imageName: req.body.imageName
+    }
+    if (req.params.articleNumber != undefined){
+        await productSchema.findByIdAndUpdate(req.params.articleNumber, product)
+        res.status(200).json(product)
+    }
+    else
         res.status(404).json()
 })
 // .put((req, res) => { 
@@ -107,7 +110,7 @@ controller.route("/details/:articleNumber")
 
 // SECURED
 // .delete(authorize, async(req,res) => {
-.delete(async(req,res) => {
+.delete(authorize, async(req,res) => {
     if (!req.params.articleNumber)
         res.status(400).json('no work')
     else{
@@ -124,7 +127,7 @@ controller.route("/details/:articleNumber")
 controller.route('/:tag')
 .get(async (req, res) => {
     const ReactProducts = []
-    const DBproducts = await ProductSchema.find({tag: req.params.tag})
+    const DBproducts = await productSchema.find({tag: req.params.tag})
     if(DBproducts) {
         for(let product of DBproducts) {
             DBproducts.push({
@@ -146,3 +149,33 @@ controller.route('/:tag')
 
 
 module.exports = controller
+
+
+
+
+
+
+
+// console.log(product.name = req.body.name)
+    // // console.log(req.body)
+    // // console.log(product._id)
+    
+    // if (product){
+    //     // product._id = product._id
+    //     product.name = req.body.name
+    //     product.category = req.body.category
+    //     product.tag = req.body.tag
+    //     product.price = req.body.price
+    //     product.rating = req.body.rating
+    //     product.imageName = req.body.imageName
+
+
+
+
+
+    //     await productSchema.updateOne(product)
+
+    //     // console.log(newProduct)
+    //     res.status(200).json(product)
+    //     console.log(product)
+    // }
