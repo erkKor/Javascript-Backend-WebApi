@@ -22,14 +22,20 @@ controller.route('/').post(authorize, async (req, res) => {
             rating,
             imageName
         })
-
-        // const productNEW = await productSchema.findById(req.params.articleNumber)
-
-        if (product)
-            res.status(201).json(product)
+        const productNEW = await productSchema.findById(product._id)
+        if (productNEW){
+            res.status(201).json({
+                articleNumber: product._id,
+                name: product.name,
+                category: product.category,
+                tag: product.tag,
+                price: product.price,       
+                rating: product.rating,
+                imageName: product.imageName
+            })
+            }
         else
             res.status(400).json({text: 'something wong'})
-        
     }
 })
 

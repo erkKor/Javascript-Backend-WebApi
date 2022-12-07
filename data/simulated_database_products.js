@@ -10,14 +10,17 @@ const products = [
     { tag:"square2", articleNumber: 9, name: "Brown watch", category: "Watches", price: 150, rating: 3, imageName: "https://win22imgstorage.blob.core.windows.net/images/brown-watch.png" },
     { tag:"latest", articleNumber: 10, name: "Stiletto shoes", category: "Shoes", price: 89, rating: 3, imageName: "https://win22imgstorage.blob.core.windows.net/images/chrome-shoe.png"  },
     { tag:"featured", articleNumber: 11, name: "Gray t-shirt", category: "T-Shirts", price: 15, rating: 3, imageName: "https://win22imgstorage.blob.core.windows.net/images/gray-tshirt.png" },
+
     { tag:"square1", articleNumber: 12, name: "Jeans dress", category: "Jeans", price: 55, rating: 4, imageName: "https://win22imgstorage.blob.core.windows.net/images/jeans-dress.png" },
     { tag:"square1", articleNumber: 13, name: "Jeans jacket & pants", category: "Sets", price: 110, rating: 4, imageName: "https://win22imgstorage.blob.core.windows.net/images/jeans-set.png" },
     { tag:"square1", articleNumber: 14, name: "Olive sweater", category: "Sweaters", price: 19, rating: 2, imageName: "https://win22imgstorage.blob.core.windows.net/images/olive-sweater.png" },
     { tag:"square1", articleNumber: 15, name: "Multicolor t-shirt", category: "T-shirts", price: 25, rating: 2, imageName: "https://win22imgstorage.blob.core.windows.net/images/multicolor-tshirt.png" },
     { tag:"bestSeller", articleNumber: 16, name: "Purple handbag", category: "Bags",price: 99, rating: 5, imageName: "https://win22imgstorage.blob.core.windows.net/images/purple-bag.png" },
+
     { tag:"latest", articleNumber: 17, name: "Red handbag", category: "Bags", price: 105, rating: 5, imageName: "https://win22imgstorage.blob.core.windows.net/images/red-bag.png" },
     { tag:"latest", articleNumber: 18, name: "Red dress", category: "Dresses", price: 67, rating: 3, imageName: "https://win22imgstorage.blob.core.windows.net/images/red-dress.png" },
     { tag:"bestSeller", articleNumber: 19, name: "Striped top", category: "Tops", price: 45, rating: 4, imageName: "https://win22imgstorage.blob.core.windows.net/images/striped-top.png" },
+    
     { tag:"square2", articleNumber: 20, name: "Striped pink pants", category: "Pants", price: 36, rating: 2, imageName: "https://win22imgstorage.blob.core.windows.net/images/striped-pants.png" },
     { tag:"bestSeller", articleNumber: 21, name: "White seater", category: "Sweaters", price: 25, rating: 2, imageName: "https://win22imgstorage.blob.core.windows.net/images/white-sweater.png" },
     { tag:"square2", articleNumber: 22, name: "Winter boots", category: "Shoes", price: 85, rating: 2, imageName: "https://win22imgstorage.blob.core.windows.net/images/winter-boots.png" } , 
