@@ -1,6 +1,6 @@
 const express = require('express')
 const { authorize } = require('../middlewares/authorization')
-const productSchema = require('../schema/productSchema')
+const productSchema = require('../schemas/productSchema')
 const controller = express.Router()
 
 
