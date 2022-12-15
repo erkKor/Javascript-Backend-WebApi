@@ -17,6 +17,7 @@ const VendorType = new GraphQLObjectType({
         }
     })
 })
+
 const ProductType = new GraphQLObjectType({
     name: 'Product',
     fields:() => ({
@@ -90,7 +91,7 @@ const Mutation = new GraphQLObjectType({
                 tag: { type: GraphQLString},
                 price: { type: GraphQLString},
                 rating: { type: GraphQLString},
-                vendorId: {type: GraphQLID}
+                vendorId: { type: GraphQLID}
             },
             resolve(parent, args){
                 const product = new Product({
@@ -104,6 +105,41 @@ const Mutation = new GraphQLObjectType({
                 return product.save()
             }
         },
+        updateProduct: {
+            type: ProductType, 
+            args: {
+                id: { type: GraphQLID },
+                name: { type: GraphQLString},
+                category: { type: GraphQLString},
+                tag: { type: GraphQLString},
+                price: { type: GraphQLString},
+                rating: { type: GraphQLString},
+                vendorId: { type: GraphQLID}
+            },
+            resolve(parent, args){
+                return Product.findByIdAndUpdate(args.id, {
+                    $set: {
+                        name: args.name,
+                        category: args.category,
+                        tag: args.tag,
+                        price: args.price,
+                        rating: args.rating,
+                        vendorId: args.vendorId
+                    }
+                },
+                {new:true})
+            }
+        },
+        deleteProduct: {
+            type: ProductType,
+            args: {
+                id: { type: GraphQLID }
+            },
+            resolve(parent,args){
+                return Product.findByIdAndRemove(args.id)
+            }
+        }
+
     }
 })
 
