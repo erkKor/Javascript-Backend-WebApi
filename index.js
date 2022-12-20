@@ -14,7 +14,6 @@ app.use(express.urlencoded({extended:true}))
 //routes
 // app.use('/api/products', require('./controllers/productsController'))
 app.use('/api/authentication', require('./controllers/authenticationController'))
-
 app.use('/graphql', graphqlHTTP ({
     schema: require('./schemas/graphQL/graphqlSchema'),
     graphiql: true
