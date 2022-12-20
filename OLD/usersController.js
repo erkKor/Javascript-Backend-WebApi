@@ -1,6 +1,6 @@
 const express = require('express')
 const controller = express.Router()
-let users = require('../data/simulated_database_user')
+let users = require('./data/simulated_database_user')
 
 controller.param("userID", (req, res, next, userID) => {
     req.users = users.find(user => user.userID == userID)

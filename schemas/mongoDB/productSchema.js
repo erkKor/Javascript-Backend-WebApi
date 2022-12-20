@@ -8,7 +8,8 @@ const productSchema = mongoose.Schema(
         tag: { type: mongoose.Schema.Types.String, required: true},
         price: { type: mongoose.Schema.Types.String, required: true},
         rating: { type: mongoose.Schema.Types.String, required: true},
-        vendorId: { type: mongoose.Schema.Types.String, required: true}
+        vendorId: { type: mongoose.Schema.Types.String, required: true},
+        imageName: {type: mongoose.Schema.Types.String}
     }
 )
 

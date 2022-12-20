@@ -1,6 +1,6 @@
 const express = require('express')
 const controller = express.Router()
-let products = require('../data/simulated_database_products')
+let products = require('./data/simulated_database_products')
 
 controller.param("articleNumber", (req, res, next, articleNumber) => {
     req.product = products.find(product => product.articleNumber == articleNumber)

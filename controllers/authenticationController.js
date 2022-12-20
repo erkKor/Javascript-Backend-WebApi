@@ -4,7 +4,7 @@ const bcrypt = require('bcryptjs')
 const controller = express.Router()
 
 const {generateAccesToken} = require('../middlewares/authorization')
-const userSchema = require('../schemas/userSchema')
+const userSchema = require('../schemas/mongoDB/userSchema')
 
 //unsecured rou
 controller.route('/signup').post(async(req,res) => {

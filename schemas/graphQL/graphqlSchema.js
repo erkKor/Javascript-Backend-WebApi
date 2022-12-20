@@ -32,7 +32,8 @@ const ProductType = new GraphQLObjectType({
             resolve(parent, args){
                 return Vendor.findById(parent.vendorId)
             }
-        }
+        },
+        imageName: {type: GraphQLString}
     })
 })
 
@@ -65,6 +66,13 @@ const RootQuery = new GraphQLObjectType({
                 return Product.find({})
             }
         },
+        getByTag: {
+            type: new GraphQLList(ProductType),
+            args: { tag: {type: GraphQLString}},
+            resolve(parent,args){
+                return Product.find({tag: args.tag})
+            }
+        }
     }
 })
 
@@ -91,7 +99,8 @@ const Mutation = new GraphQLObjectType({
                 tag: { type: GraphQLString},
                 price: { type: GraphQLString},
                 rating: { type: GraphQLString},
-                vendorId: { type: GraphQLID}
+                vendorId: { type: GraphQLID},
+                imageName: { type: GraphQLString}
             },
             resolve(parent, args){
                 const product = new Product({
@@ -100,7 +109,8 @@ const Mutation = new GraphQLObjectType({
                     tag: args.tag,
                     price: args.price,
                     rating: args.rating,
-                    vendorId: args.vendorId
+                    vendorId: args.vendorId,
+                    imageName: args.imageName
                 })
                 return product.save()
             }
@@ -114,6 +124,7 @@ const Mutation = new GraphQLObjectType({
                 tag: { type: GraphQLString},
                 price: { type: GraphQLString},
                 rating: { type: GraphQLString},
+                imageName: { type: GraphQLString},
                 vendorId: { type: GraphQLID}
             },
             resolve(parent, args){
@@ -124,6 +135,7 @@ const Mutation = new GraphQLObjectType({
                         tag: args.tag,
                         price: args.price,
                         rating: args.rating,
+                        imageName: args.imageName,
                         vendorId: args.vendorId
                     }
                 },
